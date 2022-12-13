@@ -42,11 +42,41 @@ public class PersonsManager {
         return null;
     }
 
+    public void addPersonFromKeyBoard() {
+        var person = getPersonFromKeyBoard();
+        addPerson(person);
+    }
+
     public boolean isPersonExist(Person person) {
+
         return findPersonById(person.getID()) != null;
     }
-public void addPerson(int id){
-        
-}
+
+    public void addPerson(Person person) {
+        if (isPersonExist(person)) {
+            System.out.println("nguoi nay da ton tai.");
+        }
+        Person[] personsTemp = new Person[this.persons.length + 1];
+        for (int i = 0; i < persons.length; i++) {
+            personsTemp[i] = persons[i];
+        }
+        personsTemp[persons.length] = person;
+        this.persons = personsTemp;
+    }
+
+    public void deletePersonById(int id) {
+        if (findPersonById(id) == null) {
+            System.out.println("Nguoi nay khong ton tai");
+        }
+        Person[] personsTemp = new Person[this.persons.length - 1];
+        var index = 0;
+        for (Person person : persons) {
+            if (person.getID() != id) {
+                personsTemp[index] = person;
+                index++;
+            }
+        }
+        this.persons = personsTemp;
+    }
 }
 
